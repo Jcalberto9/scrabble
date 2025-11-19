@@ -1,0 +1,14 @@
+[variables]
+NODE_ENV = "production"
+
+[phases.setup]
+nixPkgs = ['nodejs-14_x', 'npm-8_x']
+
+[phases.install]
+cmds = ['npm ci', 'cd client && npm ci']
+
+[phases.build]
+cmds = ['cd client && npm run build']
+
+[start]
+cmd = 'npm start'
