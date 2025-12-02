@@ -4,7 +4,8 @@
   "description": "Online multiplayer Scrabble game supporting up to 15 players",
   "main": "server/index.js",
   "scripts": {
-    "start": "node server/index.js",
+    "start": "node start.js",
+    "start:server": "node server/index.js",
     "dev": "concurrently \"npm run server\" \"npm run client\"",
     "server": "nodemon server/index.js",
     "client": "cd client && npm start",

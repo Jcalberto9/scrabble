@@ -1,13 +1,24 @@
 [variables]
 NODE_ENV = "production"
+NPM_CONFIG_PACKAGE_LOCK = "false"
+NPM_CONFIG_AUDIT = "false"
+NPM_CONFIG_FUND = "false"
 
 [phases.setup]
 nixPkgs = ['nodejs-14_x', 'npm-8_x']
+cmds = ['npm config set package-lock false']
 
 [phases.install]
-cmds = ['npm install --no-package-lock', 'cd client && npm install --no-package-lock']
+dependsOn = ['setup']
+cmds = [
+    'rm -rf package-lock.json',
+    'rm -rf client/package-lock.json',
+    'npm install --no-package-lock --no-audit --no-fund',
+    'cd client && npm install --no-package-lock --no-audit --no-fund'
+]
 
 [phases.build]
+dependsOn = ['install']
 cmds = ['cd client && npm run build']
 
 [start]
